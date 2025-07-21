@@ -1,0 +1,139 @@
+/*Configurações dos inputs*/
+
+.area {
+    position: relative;
+    align-items: center;
+    border: 1px solid #f0f0f0;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.area button{
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    color: #f0f0f0;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.area input {
+    background-color: transparent;
+    outline: 0;
+    border: 0;
+    font-size: 16px;
+    color: #f0f0f0;
+    padding: 16px 40px 6px 12px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* **ADICIONADO: Estilização para o preenchimento automático do navegador (WebKit/Chrome/Edge)** */
+/* Força o background e a cor do texto do input preenchido automaticamente */
+.area input:-webkit-autofill,
+.area input:-webkit-autofill:hover,
+.area input:-webkit-autofill:focus,
+.area input:-webkit-autofill:active {
+    /* Usa uma sombra interna que "cobre" o fundo padrão do navegador */
+    -webkit-box-shadow: 0 0 0px 1000px #334155 inset !important;
+    /* Define a cor do texto para o seu tema */
+    -webkit-text-fill-color: #f0f0f0 !important;
+    /* Uma transição muito longa para evitar a animação de mudança de cor do navegador */
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* **ADICIONADO: Garante que o LABEL flutue quando o input está autofilled (WebKit)** */
+/* Isso é crucial para resolver o problema do label sobrepondo o texto autofilled */
+.area input:-webkit-autofill ~ label {
+    top: 0;
+    font-size: 12px;
+    padding: 0 5px;
+    background: #334155; /* A cor do background do label flutuante */
+    color: #f0f0f0;
+}
+
+/* Estilização da seleção de texto dentro do input */
+.area input::selection {
+    background: #28A745; /* Cor de destaque da seleção (verde do seu tema) */
+    color: #f0f0f0; /* Cor do texto selecionado */
+}
+.area input::-moz-selection { /* Para Firefox */
+    background: #28A745;
+    color: #f0f0f0;
+}
+
+.area label {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: .2s ease;
+    color: #f0f0f0;
+    pointer-events: none;
+    background: transparent;
+}
+
+/* Mantém o comportamento do label ao focar ou ter conteúdo (digitado) */
+.area input:focus ~ label,
+.area input:not(:placeholder-shown) ~ label {
+    top: 0;
+    font-size: 12px;
+    padding: 0 5px;
+    background: #334155; /* A cor do background do label flutuante */
+    color: #f0f0f0;
+}
+
+/* Mantendo sua borda de foco existente */
+.area:focus-within {
+    border-color: #28A745;
+}
+
+/*Configurações do toggle button*/
+
+.App{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    color: white;
+}
+
+.toggle-btn{
+    background-color: #b7b9ba;
+    border: 1px solid #aaa;
+    border-radius: 99px;
+    width: 50px;
+    height: 28px;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+    box-shadow: 1px 1px 10px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.thumb{
+    height: 22px;
+    width: 22px;
+    background-color: #fff;
+    border-radius: 99px;
+    transition: left 0.2s ease;
+    position: absolute;
+    left: 3px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.toggle-btn:hover{
+    border-color: #6f6f6f;
+}
+
+.toggle-btn.toggled{
+    background-color: #28A745;
+    border-color: #28A745;
+}
+
+.toggle-btn.toggled .thumb{
+    left: calc(100% - 22px - 3px);
+}
