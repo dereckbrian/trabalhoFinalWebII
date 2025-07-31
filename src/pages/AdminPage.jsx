@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UserScreen from "../components/UserScreen";
 import Navbar from "../components/Navbar";
-
+import AdminScreen from '../components/AdminScreen';
 function UserPage() {
     const [userName, setUserName] = useState('');
     const navigate = useNavigate();
@@ -24,8 +24,8 @@ function UserPage() {
 
     return (
         <div>
-            <h1>Bem vindo a pagina de ADMINISTRADOR</h1>
-            <UserScreen />
+            
+            <AdminScreen />
         </div>
     );
 }
