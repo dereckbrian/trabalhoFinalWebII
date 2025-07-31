@@ -6,7 +6,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import RegisterPage from './pages/RegisterPage.jsx'
 import LoginPage from './pages/LoginPage';
 import UserPage from './pages/UserPage';
-
+import PrivateRoute from './pages/PrivateRoute.jsx';
+import Logout from './components/Logout.jsx'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,7 +23,11 @@ const router = createBrowserRouter([
   },
   {
     path: "userPage",
-    element: <UserPage />,
+    element: <PrivateRoute element={<UserPage />} /> ,
+  },
+  {
+    path: "logout",
+    element : <Logout/>,
   },
 ]);
 

@@ -3,7 +3,7 @@ import api from '../config/axiosInstance';
 import { useNavigate } from "react-router-dom"
 
 const LoginPage = () => {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const onLoginClick = (dadosLogin) => {
         api.post('/login', {
@@ -12,16 +12,16 @@ const LoginPage = () => {
         })
         .then(response => {
             const token = JSON.stringify(response.data.token);
-            const name = JSON.stringify(response.data.name)
+            const name = JSON.stringify(response.data.name);
             console.log("Token JWT recebido", token);
             localStorage.setItem('token', token);
             localStorage.setItem('name', name);
 
-            navigate('/userPage'); 
+            navigate('/userPage'); // Redireciona para a página do usuário
         })
         .catch(error => {
             console.error("Erro ao logar: ", error);
-            alert("Email ou senha incorretos")
+            alert("Email ou senha incorretos");
         });
     };
 
@@ -31,5 +31,4 @@ const LoginPage = () => {
         </div>
     );
 };
-
 export default LoginPage;
