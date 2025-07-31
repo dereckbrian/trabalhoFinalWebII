@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UserScreen from "../components/UserScreen";
+import Navbar from "../components/Navbar";
 
 function UserPage() {
     const [userName, setUserName] = useState('');
@@ -23,6 +24,7 @@ function UserPage() {
 
     return (
         <div>
+            <Navbar userName={userName}/>
             <UserScreen />
         </div>
     );
