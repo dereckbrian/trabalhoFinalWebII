@@ -8,6 +8,8 @@ import LoginPage from './pages/LoginPage';
 import UserPage from './pages/UserPage';
 import PrivateRoute from './pages/PrivateRoute.jsx';
 import Logout from './components/Logout.jsx'
+import ProtectedRoute from './pages/ProtectedAdmin.jsx'
+import AdminPage from './pages/AdminPage.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -28,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "logout",
     element : <Logout/>,
+  },
+  {
+path: "adminPage",
+element: <ProtectedRoute element={<AdminPage/>}/>
   },
 ]);
 

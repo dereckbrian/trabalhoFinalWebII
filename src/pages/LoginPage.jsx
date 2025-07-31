@@ -1,7 +1,7 @@
 import LoginScreen from "../components/LoginScreen";
 import api from '../config/axiosInstance';
 import { useNavigate } from "react-router-dom"
-
+import { jwtDecode } from 'jwt-decode';
 const LoginPage = () => {
     const navigate = useNavigate();
 
@@ -24,7 +24,25 @@ const LoginPage = () => {
             alert("Email ou senha incorretos");
         });
     };
+    const token = localStorage.getItem('token'); // Pega o token JWT do localStorage
 
+if (token) {
+  // Decodifica o token
+  const decodedToken = jwtDecode(token);
+  console.log(decodedToken);  // Exibe todo o conteúdo do token no console
+
+  // Verifica a role do usuário
+  const role = decodedToken.role;
+  console.log("Role do usuário:", role); // Exibe a role no console
+
+  // Verifica a expiração do token
+  const currentTime = Date.now() / 1000; // Tempo atual em segundos
+  if (decodedToken.exp < currentTime) {
+    console.log("O token está expirado");
+  }
+} else {
+  console.log("Token não encontrado no localStorage");
+}
     return (
         <div>
             <LoginScreen onLoginClick={onLoginClick} />
