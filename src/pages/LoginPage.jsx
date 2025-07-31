@@ -17,32 +17,23 @@ const LoginPage = () => {
             localStorage.setItem('token', token);
             localStorage.setItem('name', name);
 
-            navigate('/userPage'); // Redireciona para a página do usuário
+            const TokenSaved = localStorage.getItem('token'); // Pega o token JWT do localStorage
+    const decodedToken = jwtDecode(TokenSaved);
+    const role = decodedToken.role;
+    if(role == "ADMIN"){
+        
+        navigate('/adminPage');
+    }else{
+        navigate('/userPage'); // Redireciona para a página do usuário
+    }
+            
         })
         .catch(error => {
             console.error("Erro ao logar: ", error);
             alert("Email ou senha incorretos");
         });
     };
-    const token = localStorage.getItem('token'); // Pega o token JWT do localStorage
-
-if (token) {
-  // Decodifica o token
-  const decodedToken = jwtDecode(token);
-  console.log(decodedToken);  // Exibe todo o conteúdo do token no console
-
-  // Verifica a role do usuário
-  const role = decodedToken.role;
-  console.log("Role do usuário:", role); // Exibe a role no console
-
-  // Verifica a expiração do token
-  const currentTime = Date.now() / 1000; // Tempo atual em segundos
-  if (decodedToken.exp < currentTime) {
-    console.log("O token está expirado");
-  }
-} else {
-  console.log("Token não encontrado no localStorage");
-}
+    
     return (
         <div>
             <LoginScreen onLoginClick={onLoginClick} />

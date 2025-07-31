@@ -24,7 +24,7 @@ function UserPage() {
 
     return (
         <div>
-            <Navbar userName={userName}/>
+            <h1>Bem vindo a pagina de ADMINISTRADOR</h1>
             <UserScreen />
         </div>
     );

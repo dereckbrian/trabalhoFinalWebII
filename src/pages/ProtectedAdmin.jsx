@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode'; // Certifique-se de instalar a biblioteca jwt-decode
 
-const ProtectedRoute = ({ element }) => {
+const ProtectedAdmin = ({ element }) => {
   const token = localStorage.getItem('token'); // Pega o token JWT do localStorage
 
   if (!token) {
@@ -17,13 +17,13 @@ const ProtectedRoute = ({ element }) => {
     if (decodedToken.exp < currentTime) {
       // Se o token estiver expirado, remove o token e redireciona para o logar
       localStorage.removeItem('token');
-      return <Navigate to="/logar" />;
+      return <Navigate to="/adminPage" />;
     }
 
     // Verifica se a role é 'admin'
     if (decodedToken.role !== 'ADMIN') {
       // Se não for admin, redireciona para uma página de acesso restrito
-      return <Navigate to="/logar" />;
+      return <Navigate to="/userPage" />;
     }
 
     // Se o token for válido e o usuário for admin, renderiza o componente protegido
@@ -35,4 +35,4 @@ const ProtectedRoute = ({ element }) => {
   }
 };
 
-export default ProtectedRoute;
+export default ProtectedAdmin;
