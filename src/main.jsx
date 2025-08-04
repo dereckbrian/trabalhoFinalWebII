@@ -13,6 +13,9 @@ import AdminPage from './pages/AdminPage.jsx';
 import PacotesPage from './pages/PacotesPage.jsx';
 import UserList from './components/UserList.jsx'
 import AdminDashboard from './components/AdminDashboard.jsx'
+import SidebarLayout from './components/SidebarLayout';
+import UserScreen from './components/UserScreen.jsx'
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -60,6 +63,37 @@ const router = createBrowserRouter([
       },
     ],
   },
+  // ROTAS GERAIS COM SIDEBAR
+  {
+  path: "/userPage",
+  element:  <PrivateRoute element={<SidebarLayout />} /> ,
+  children: [
+    {
+      path: "", // quando acessar apenas "/"
+      element: <UserScreen/>,
+    },
+    {
+      path: "activity",
+      element: <h1 style={{ color: "black" }}>Hello from Activity!</h1>,
+    },
+    {
+      path: "pacotes",
+      element: <PacotesPage/>,
+    },
+    {
+      path: "progress",
+      element: <h1 style={{ color: "black" }}>Hello from Progress!</h1>,
+    },
+    {
+      path: "payment",
+      element: <h1 style={{ color: "black" }}>Hello from Payment!</h1>,
+    },
+    {
+      path: "setting",
+      element: <h1 style={{ color: "white" }}>Hello from Settings!</h1>,
+    },
+  ],
+}
 ]);
 
 createRoot(document.getElementById('root')).render(
