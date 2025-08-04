@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import PacotesScreen from '../components/PacoteScreen';
-function PacotesPage() {
+function PetsPage() {
   const navigate = useNavigate();
 
   return (
@@ -15,4 +15,4 @@ function PacotesPage() {
   );
 }
 
-export default PacotesPage;
+export default PetsPage;

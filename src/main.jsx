@@ -16,8 +16,9 @@ import AdminDashboard from './components/AdminDashboard.jsx'
 import SidebarLayout from './components/SidebarLayout';
 import UserScreen from './components/UserScreen.jsx'
 import UserDetails from './components/UserDetails.jsx';
-
-
+import HomePage from './pages/HomePage.jsx'
+import PetsPage from './pages/PetsPage.jsx'
+import AvisosPage from './pages/AvisosPage.jsx'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -76,7 +77,7 @@ const router = createBrowserRouter([
   children: [
     {
       path: "", // quando acessar apenas "/"
-      element: <h1 style={{ color: "black" }}>Hello from Home!</h1>,
+      element:<HomePage/> ,
     },
     {
       path: "activity",
@@ -85,6 +86,15 @@ const router = createBrowserRouter([
     {
       path: "pacotes",
       element: <PacotesPage/>,
+    },
+    
+    {
+      path: "pets",
+      element: <PetsPage/>,
+    },
+    {
+      path: "avisos",
+      element: <AvisosPage/>,
     },
     {
       path: "progress",

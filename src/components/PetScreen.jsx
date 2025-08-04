@@ -24,24 +24,24 @@ const MainCardsSection = ({ navigate }) => (
     <IconCard title="Avisos" icon={<BellOutlined />} nClick={() => navigate('/avisos')} />
   </div>
 );
-function PacotesScreen() {
-    const [sidebarVisible, setSidebarVisible] = useState(false);
-    const navigate = useNavigate();
-    return (
-       <div >
-            <div className="">
-                <h1 className="text-white">Teste da pagina de pacote</h1>
-<button
+function PetScreen() {
+  const [sidebarVisible, setSidebarVisible] = useState(false);
+  const navigate = useNavigate();
+  return (
+    <div >
+      <div className="">
+        <h1 className="text-white">Teste da pagina de Pets</h1>
+        <button
           onClick={() => navigate(-1)}
           className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-600"
         >
           Voltar
         </button>
-            </div>
-        </div>
+      </div>
+    </div>
 
 
-    )
+  )
 }
 
-export default PacotesScreen
+export default PetScreen

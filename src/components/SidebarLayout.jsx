@@ -15,14 +15,14 @@ const SidebarLayout = () => {
       />
 
       <div
-        className={`flex-1 p-9 transition-all duration-300 overflow-y-auto bg-[#4B3C5D] ${
+        className={`flex-1 p-9 transition-all duration-300 overflow-y-auto bg-slate-900 ${
           sidebarVisible ? 'ml-[200px]' : 'ml-0'
         }`}
       >
         <div className="flex items-center mb-8 ">
           {!sidebarVisible && (
             <button
-              className="text-white text-2xl mr-4 bg-[#4B3C5D]"
+              className="text-white text-2xl mr-4 bg-slate-900"
               onClick={() => setSidebarVisible(true)}
             >
               <MenuOutlined />
