@@ -19,6 +19,7 @@ import UserDetails from './components/UserDetails.jsx';
 import HomePage from './pages/HomePage.jsx'
 import PetsPage from './pages/PetsPage.jsx'
 import AvisosPage from './pages/AvisosPage.jsx'
+import AdminScreen from './components/AdminScreen.jsx'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -82,6 +83,51 @@ const router = createBrowserRouter([
     {
       path: "activity",
       element: <h1 style={{ color: "black" }}>Hello from Activity!</h1>,
+    },
+    {
+      path: "pacotes",
+      element: <PacotesPage/>,
+    },
+    
+    {
+      path: "pets",
+      element: <PetsPage/>,
+    },
+    {
+      path: "avisos",
+      element: <AvisosPage/>,
+    },
+    {
+      path: "progress",
+      element: <h1 style={{ color: "black" }}>Hello from Progress!</h1>,
+    },
+    {
+      path: "payment",
+      element: <h1 style={{ color: "black" }}>Hello from Payment!</h1>,
+    },
+    {
+      path: "setting",
+      element: <h1 style={{ color: "white" }}>Hello from Settings!</h1>,
+    },
+  ],
+}
+,
+// ROTAS GERAIS ADMINISTRADOR
+  {
+  path: "/adminPage",
+  element:  <PrivateRoute element={<AdminPage />} /> ,
+  children: [
+    {
+      path: "", // quando acessar apenas "/"
+      element: <h1>Tela do adminininastror</h1>,
+    },
+    {
+      path: "users",
+      element: <UserList/>,
+    },
+    {
+     path: "users/:id", // Rota com parâmetro dinâmico
+  element: <ProtectedAdmin element={<UserDetails />} />
     },
     {
       path: "pacotes",

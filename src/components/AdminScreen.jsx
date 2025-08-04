@@ -1,57 +1,52 @@
-import React from "react";
-import { Link } from 'react-router-dom';
-const AdminPage = () => {
+import { useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
+import { useState } from 'react';
+import { MailOutlined, GithubOutlined, LockOutlined, UserOutlined, BellOutlined, MenuOutlined } from '@ant-design/icons';
+
+import SidebarLayoutAdmin from './SidebarLayoutAdmin';
+//Pegando o nome pra exibir
+const name = JSON.parse(localStorage.getItem('name') || '""');
+console.log("Nome recuperado:", name);
+
+const IconCard = ({ title, icon, onClick }) => (
+  <div className="flex flex-col items-center justify-center p-4 bg-slate-800 rounded-lg shadow-md hover:bg-slate-700 transition-colors duration-200 cursor-pointer"
+    onClick={onClick}
+  >
+    <div className="text-white text-3xl mb-2">{icon}</div>
+    <span className="text-white text-sm">{title}</span>
+  </div>
+);
+
+const MainCardsSection = ({ navigate }) => (
+
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+    <IconCard title="Pacotes" icon={<MailOutlined />} onClick={() => navigate('/userPage/pacotes')} />
+    <IconCard title="Pets" icon={<GithubOutlined />} nClick={() => navigate('/pets')} />
+    <IconCard title="Configurações de Conta" icon={<LockOutlined />} nClick={() => navigate('/configs')} />
+    <IconCard title="Meus Pets" icon={<UserOutlined />} nClick={() => navigate('/meusPets')} />
+    <IconCard title="Avisos" icon={<BellOutlined />} nClick={() => navigate('/avisos')} />
+  </div>
+);
+
+function AdminScreen() {
+  const navigate = useNavigate();
+  const [sidebarVisible, setSidebarVisible] = useState(false);
+
   return (
-    <div className="flex h-screen bg-gray-100">
-      {/* Sidebar */}
-      <div className="w-64 bg-blue-800 text-white p-5 space-y-6">
-        <h1 className="text-2xl font-semibold">Admin Dashboard</h1>
-        <ul>
-          <li className="mt-4">
-            <a href="/admin" className="hover:text-gray-300">Dashboard</a>
-          </li>
-          <li className="mt-4">
-            
+     <div className="flex justify-center items-center w-screen h-screen bg-gradient-to-b from-[#4B3C5D] to-[#11051a]">
+      <div className="w-[95%] h-[95%] flex flex-col rounded-xl bg-slate-900 drop-shadow-lg relative overflow-hidden ">
+        {/* Sidebar Section */}
+        <SidebarLayoutAdmin />
 
-        <Link to="/admin/users" className="hover:text-gray-300">Users</Link>
-          </li>
-          <li className="mt-4">
-            <a href="/admin/settings" className="hover:text-gray-300">Settings</a>
-          </li>
-        </ul>
-      </div>
-
-      {/* Main Content */}
-      <div className="flex-1 p-6">
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-3xl font-semibold mb-6">Dashboard Overview</h2>
-          <p className="text-gray-600">
-            Welcome to your admin dashboard! You can manage users, settings, and view statistics here.
-          </p>
-
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {/* Card 1 */}
-            <div className="bg-blue-50 p-6 rounded-lg shadow-md">
-              <h3 className="text-lg font-semibold">Total Users</h3>
-              <p className="text-xl font-bold text-blue-800 mt-2">150</p>
-            </div>
-
-            {/* Card 2 */}
-            <div className="bg-green-50 p-6 rounded-lg shadow-md">
-              <h3 className="text-lg font-semibold">Active Sessions</h3>
-              <p className="text-xl font-bold text-green-800 mt-2">45</p>
-            </div>
-
-            {/* Card 3 */}
-            <div className="bg-yellow-50 p-6 rounded-lg shadow-md">
-              <h3 className="text-lg font-semibold">Pending Tasks</h3>
-              <p className="text-xl font-bold text-yellow-800 mt-2">8</p>
-            </div>
+        {/* Main Content Area */}
+        <div className="flex flex-col flex-1 p-6 space-y-6">
+          <div className="w-full bg-gradient-to-r from-indigo-700 to-indigo-900 rounded-xl p-8 shadow-md hover:shadow-2xl transition-shadow duration-300">
+            <MainCardsSection navigate={navigate} />
           </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
-export default AdminPage;
+export default AdminScreen;

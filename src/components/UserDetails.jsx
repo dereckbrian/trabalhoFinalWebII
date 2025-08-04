@@ -100,7 +100,7 @@ const UserDetails = () => {
           Salvar
         </button>
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => navigate('/adminPage/users')}
           className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-600"
         >
           Voltar

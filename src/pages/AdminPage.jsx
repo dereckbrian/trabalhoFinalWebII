@@ -23,10 +23,10 @@ function UserPage() {
     }, [navigate]);
 
     return (
-        <div>
-            
-            <AdminScreen />
-        </div>
+        <div >
+      <AdminScreen/>
+      
+      </div>
     );
 }
 

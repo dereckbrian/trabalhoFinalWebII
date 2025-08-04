@@ -1,10 +1,10 @@
   import React, { useEffect, useState } from "react";
   import axios from "axios";
   import { Link } from "react-router-dom"; // Para navegação
-
+  import { useNavigate } from "react-router-dom";
   const UserList = () => {
     const [users, setUsers] = useState([]);
-
+      const navigate = useNavigate();
     // Carregar os usuários ao montar o componente
     useEffect(() => {
       const fetchUsers = async () => {
@@ -54,12 +54,12 @@
                   <td className="py-3 px-4 border-b">{user.email}</td>
                   <td className="py-3 px-4 border-b">{user.role}</td>
                   <td className="py-3 px-4 border-b">
-                    <Link
-                      to={`/admin/users/${user.id}`}
+                    <button
+                      onClick={()=>{navigate(`/adminPage/users/${user.id}`)}}
                       className="text-blue-600 hover:text-blue-800"
                     >
                       Ver detalhes
-                    </Link>
+                    </button>
                   </td>
                 </tr>
               ))
