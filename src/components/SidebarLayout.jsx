@@ -1,0 +1,40 @@
+// components/SidebarLayout.jsx
+import React, { useState } from 'react';
+import Navbar from './Navbar';
+import { MenuOutlined } from '@ant-design/icons';
+import { Outlet } from 'react-router-dom';
+
+const SidebarLayout = () => {
+  const [sidebarVisible, setSidebarVisible] = useState(false);
+
+  return (
+    <div className="flex min-h-screen relative bg-[#4B3C5D]">
+      <Navbar
+        sidebarVisible={sidebarVisible}
+        setSidebarVisible={setSidebarVisible}
+      />
+
+      <div
+        className={`flex-1 p-9 transition-all duration-300 overflow-y-auto bg-[#4B3C5D] ${
+          sidebarVisible ? 'ml-[200px]' : 'ml-0'
+        }`}
+      >
+        <div className="flex items-center mb-8 ">
+          {!sidebarVisible && (
+            <button
+              className="text-white text-2xl mr-4 bg-[#4B3C5D]"
+              onClick={() => setSidebarVisible(true)}
+            >
+              <MenuOutlined />
+            </button>
+          )}
+        </div>
+
+        {/* Onde o conteúdo da rota será renderizado */}
+        <Outlet />
+      </div>
+    </div>
+  );
+};
+
+export default SidebarLayout;
