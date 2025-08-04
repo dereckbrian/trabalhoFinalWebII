@@ -2,6 +2,10 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import { useState } from 'react';
 import { MailOutlined, GithubOutlined, LockOutlined, UserOutlined, BellOutlined, MenuOutlined } from '@ant-design/icons';
+import SidebarLayout from './SidebarLayout';
+//Pegando o nome pra exibir
+const name = JSON.parse(localStorage.getItem('name') || '""');
+console.log("Nome recuperado:", name);
 
 const IconCard = ({ title, icon, onClick }) => (
   <div className="flex flex-col items-center justify-center p-4 bg-slate-800 rounded-lg shadow-md hover:bg-slate-700 transition-colors duration-200 cursor-pointer"
@@ -13,8 +17,9 @@ const IconCard = ({ title, icon, onClick }) => (
 );
 
 const MainCardsSection = ({ navigate }) => (
+  
   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-    <IconCard title="Pacotes" icon={<MailOutlined />} onClick={() => navigate('/pacotes')}/>
+    <IconCard title="Pacotes" icon={<MailOutlined />} onClick={() => navigate('/userPage/pacotes')}/>
     <IconCard title="Pets" icon={<GithubOutlined />} nClick={() => navigate('/pets')}/>
     <IconCard title="Configurações de Conta" icon={<LockOutlined />} nClick={() => navigate('/configs')}/>
     <IconCard title="Meus Pets" icon={<UserOutlined />} nClick={() => navigate('/meusPets')}/>
@@ -27,15 +32,12 @@ function UserScreen() {
   const [sidebarVisible, setSidebarVisible] = useState(false);
 
   return (
-    <div className="flex justify-center items-center w-screen h-screen bg-[#4B3C5D]">
+   
       <div
         className="w-[95%] h-[95%] flex rounded-xl bg-slate-900 drop-shadow-[0px_10px_20px_rgba(0,0,0,0.5)] relative overflow-hidden"
       >
-        {/* Navbar */}
-        <Navbar
-          sidebarVisible={sidebarVisible}
-          setSidebarVisible={setSidebarVisible}
-        />
+       
+        
 
         <div
           className={`flex-1 p-9 transition-all duration-300 overflow-y-auto ${sidebarVisible ? 'ml-[200px]' : 'ml-0'}`}
@@ -43,21 +45,14 @@ function UserScreen() {
           {/* Header com o botão de hambúrguer e informações do usuário */}
           <div className="flex items-center mb-8">
             {/* Botão para abrir a sidebar - visível apenas quando a sidebar está fechada */}
-            {!sidebarVisible && (
-              <button
-                className="text-white text-2xl mr-4" // Removido 'absolute' e 'top-4' para não sobrepor
-                onClick={() => setSidebarVisible(true)}
-              >
-                <MenuOutlined /> {/* Ícone de hambúrguer simples */}
-              </button>
-            )}
+            
             <div className="flex items-center">
               <div className="w-16 h-16 rounded-full overflow-hidden bg-white mr-4">
                 <img src="https://i.pravatar.cc/150?img=1" alt="User Avatar" className="w-full h-full object-cover" />
               </div>
               <div>
                 <div className="text-sm text-gray-400">Bem Vindo</div>
-                <h2 className="text-2xl font-bold text-white">John Doe</h2>
+                <h2 className="text-2xl font-bold text-white">{name}</h2>
                 <p className="text-sm text-gray-400">Owner - Apt 10 Riverside Condos</p>
               </div>
             </div>
@@ -90,7 +85,7 @@ function UserScreen() {
           </div>
         </div>
       </div>
-    </div>
+    
   );
 }
 

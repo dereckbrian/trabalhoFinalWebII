@@ -1,20 +1,22 @@
 import { Menu } from "antd";
 import { AppstoreAddOutlined, AreaChartOutlined, BarsOutlined, HomeOutlined, PayCircleOutlined, SettingFilled } from '@ant-design/icons';
-
+import { useNavigate } from "react-router-dom"
 const MenuList = ({ darkTheme }) => {
+    const navigate = useNavigate();
     return (
         <Menu 
          theme={darkTheme ? 'dark' : 'light'} 
          mode="inline" 
          className="menu-bar"
          style={{ backgroundColor: '#142434', }}
-        >
-            <Menu.Item key="home" icon={<HomeOutlined />}
+        onClick={({ key }) => navigate(key)}> 
+        
+            <Menu.Item key="/userPage" icon={<HomeOutlined />}
             >
                 Home
             </Menu.Item>
 
-            <Menu.Item key="activity" icon={<AppstoreAddOutlined />}
+            <Menu.Item key="/userPage/activity" icon={<AppstoreAddOutlined />}
             >
                 Activity
             </Menu.Item>
