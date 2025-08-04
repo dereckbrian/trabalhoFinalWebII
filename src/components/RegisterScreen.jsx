@@ -9,6 +9,7 @@ function RegisterScreen(props) {
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
+    const role = 'USER';
     const [repetirSenha, setRepetirSenha] = useState('');
     const [mostrarSenha, setMostrarSenha] = useState(false);
     const [mostrarSenhaRepetir, setMostrarSenhaRepetir] = useState(false);
@@ -21,7 +22,8 @@ function RegisterScreen(props) {
     const dadosUser = {
         email,
         password,
-        name
+        name,
+        role
     };
     props.onRegisterClick(dadosUser);
 }

@@ -1,0 +1,115 @@
+.sidebar{
+    color: #fff;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    padding: 10px;
+}
+
+.logo-icon{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    border-radius: 50%;
+    background: rgba(28, 17, 41, 0.88);
+}
+
+.menu-bar{
+    height: 88vh;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-size: 1rem;
+    position: relative;
+}
+
+.toggle-theme-btn{
+    position: absolute;
+    bottom: 30px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.toggle{
+    margin-left: 15px;
+}
+
+
+/*Ver o que pode ser tirado acima*/
+
+.navbar-container {
+    position: relative;
+    height: 100%;
+}
+
+.toggle-button-fixed {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1000;
+    font-size: 1.5rem;
+    color: #fff;
+    background-color: transparent;
+    border: none;
+    transition: all 0.3s ease-in-out; 
+    cursor: pointer;
+}
+
+.toggle-button-fixed:hover {
+    color: #1890ff;
+}
+
+.toggle-button-fixed.button-shifted {
+    left: 200px; 
+}
+
+.user-screen-content {
+    margin-left: 0;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.sidebar-open .user-screen-content {
+    margin-left: 200px; 
+}
+
+.ant-menu-submenu .ant-menu {
+  background-color: #142434 !important;
+  color: #fff !important; 
+}
+
+.ant-menu-submenu .ant-menu-item,
+.ant-menu-submenu .ant-menu-submenu-title {
+  background-color: #142434 !important;
+  color: #fff !important;
+}
+
+.ant-menu-submenu .ant-menu-item-selected,
+.ant-menu-submenu .ant-menu-item:hover {
+  background-color: #142434 !important; 
+}
+
+
+.navbar-container > div > .flex.items-center.justify-between.mb-4 {
+  background-color: #142434; 
+  padding: 10px 15px; 
+  margin-bottom: 15px; 
+}
+
+.navbar-container > div > .flex.items-center.justify-between.mb-4 .ant-btn-text {
+  color: white;
+}
+
+.navbar-container > div > .flex.items-center.justify-between.mb-4 .anticon {
+  color: white; 
+}

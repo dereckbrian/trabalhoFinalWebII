@@ -24,7 +24,7 @@ function UserPage() {
 
     return (
         <div>
-            <Navbar userName={userName}/>
+            {/*<Navbar userName={userName}/>*/}
             <UserScreen />
         </div>
     );

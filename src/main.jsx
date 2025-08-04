@@ -10,8 +10,7 @@ import PrivateRoute from './pages/PrivateRoute.jsx';
 import Logout from './components/Logout.jsx'
 import ProtectedAdmin from './pages/ProtectedAdmin.jsx'
 import AdminPage from './pages/AdminPage.jsx';
-import UserList from './components/UserList.jsx'
-import AdminDashboard from './components/AdminDashboard.jsx'
+import PacotesPage from './pages/PacotesPage.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,11 +30,15 @@ const router = createBrowserRouter([
   },
   {
     path: "logout",
-    element : <Logout/>,
+    element: <Logout/>,
   },
   {
-path: "adminPage",
-element: <ProtectedAdmin element={<AdminPage/>}/>
+    path: "adminPage",
+    element: <ProtectedAdmin element={<AdminPage/>}/>
+  },
+  {
+    path: "pacotes",
+    element: <PacotesPage />
   },
   {
     path: "admin/users", // Nova rota para exibir a lista de usuários
