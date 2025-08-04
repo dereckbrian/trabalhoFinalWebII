@@ -72,11 +72,11 @@ const router = createBrowserRouter([
   // ROTAS GERAIS COM SIDEBAR
   {
   path: "/userPage",
-  element:  <PrivateRoute element={<SidebarLayout />} /> ,
+  element:  <PrivateRoute element={<UserScreen />} /> ,
   children: [
     {
       path: "", // quando acessar apenas "/"
-      element: <UserScreen/>,
+      element: <h1 style={{ color: "black" }}>Hello from Home!</h1>,
     },
     {
       path: "activity",

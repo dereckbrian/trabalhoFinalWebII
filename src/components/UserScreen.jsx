@@ -42,7 +42,9 @@ function UserScreen() {
         <div
           className={`flex-1 p-9 transition-all duration-300 overflow-y-auto ${sidebarVisible ? 'ml-[200px]' : 'ml-0'}`}
         >
+          
           {/* Header com o botão de hambúrguer e informações do usuário */}
+          
           <div className="flex items-center mb-8">
             {/* Botão para abrir a sidebar - visível apenas quando a sidebar está fechada */}
             
