@@ -15,6 +15,8 @@ import UserList from './components/UserList.jsx'
 import AdminDashboard from './components/AdminDashboard.jsx'
 import SidebarLayout from './components/SidebarLayout';
 import UserScreen from './components/UserScreen.jsx'
+import UserDetails from './components/UserDetails.jsx';
+
 
 const router = createBrowserRouter([
   {
@@ -63,6 +65,10 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+  path: "admin/users/:id", // Rota com parâmetro dinâmico
+  element: <ProtectedAdmin element={<UserDetails />} />
+},
   // ROTAS GERAIS COM SIDEBAR
   {
   path: "/userPage",
