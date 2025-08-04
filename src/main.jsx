@@ -11,6 +11,8 @@ import Logout from './components/Logout.jsx'
 import ProtectedAdmin from './pages/ProtectedAdmin.jsx'
 import AdminPage from './pages/AdminPage.jsx';
 import PacotesPage from './pages/PacotesPage.jsx';
+import UserList from './components/UserList.jsx'
+import AdminDashboard from './components/AdminDashboard.jsx'
 const router = createBrowserRouter([
   {
     path: "/",
