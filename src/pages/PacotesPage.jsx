@@ -4,9 +4,9 @@ import api from '../config/axiosInstance';
 import PacotesScreen from '../components/PacoteScreen';
 function PacotesPage() {
 
-  const token = localStorage.getItem('token');
+  const token = JSON.parse(localStorage.getItem('token') | "");
 
-  const onAddClick = (dadosPackage) => {
+   const onAddClick = (dadosPackage) => {
     const token = JSON.parse(localStorage.getItem("token") || '""');
     if (!token) {
       alert("Token de autenticação não encontrado.");
@@ -25,6 +25,20 @@ function PacotesPage() {
     });
   }
 
+
+  /* const onAddClick = (dadosPackage) => {
+    api.post('addPackage', dadosPackage)
+        .then(response => {
+           console.log("Pacote registrado: " + JSON.stringify(response.data));
+            alert("Cadastro realizado!")
+
+            navigate('/logar?')
+        })
+        .catch(error => {
+          alert("Cadastro deu pau!")
+            console.error("Ocorreu um erro ao enviar o usuário:", error);
+        });
+} */
   return (
     <div className="flex-1 p-9 transition-all duration-300  bg-slate-900 overflow-y-auto ml-0">
       <div
