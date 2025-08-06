@@ -14,19 +14,26 @@ function RegisterScreen(props) {
     const [mostrarSenha, setMostrarSenha] = useState(false);
     const [mostrarSenhaRepetir, setMostrarSenhaRepetir] = useState(false);
 
-    const senhaInputRef = useRef(null);
+    const [profileImage, setProfileImage] = useState(null); 
 
+    const senhaInputRef = useRef(null);
     const senhaInputRefRepeat = useRef(null);
 
+    const fileInputRef = useRef(null);
+
     const quandoClicado = () => {
-    const dadosUser = {
-        email,
-        password,
-        name,
-        role
-    };
-    props.onRegisterClick(dadosUser);
-}
+        const dadosUser = new FormData();
+        dadosUser.append('email', email);
+        dadosUser.append('password', password);
+        dadosUser.append('name', name);
+        dadosUser.append('role', role);
+  
+        if (profileImage) {
+            dadosUser.append('profileImage', profileImage);
+        }
+
+        props.onRegisterClick(dadosUser);
+    }
 
     function onClickLogar(){
         navigate('/logar?')
@@ -133,13 +140,32 @@ function RegisterScreen(props) {
                                 <label htmlFor="senha-input-Repetir" className="font-bold">Repetir Senha</label>
                             </div>
                         </div>
+
+                        <div className="flex flex-col items-start">
+                            <label className="text-white font-bold mb-2">Imagem de Perfil</label>
+                            <div className="flex items-center space-x-2">
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={(e) => setProfileImage(e.target.files[0])}
+                                    ref={fileInputRef}
+                                    className="hidden" // Esconde o input de arquivo padrão
+                                />
+                                <button
+                                    onClick={(e) => { e.preventDefault(); fileInputRef.current.click(); }}
+                                    className="bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+                                >
+                                    Escolher Arquivo
+                                </button>
+                                <span className="text-sm text-gray-400">
+                                    {profileImage ? profileImage.name : "Nenhum arquivo selecionado"}
+                                </span>
+                            </div>
+                        </div>
                     </div>
-
-
-
                     <div className="flex justify-center space-y-4 p-6 font-bold font-extrabold">
                         <button className="w-[200px] rounded-md bg-green-700 text-white px-4 py-2" onClick={()=>{
-                            if(!email.trim() || !password.trim() || !repetirSenha.trim()){
+                            if(!email.trim() || !password.trim() || !repetirSenha.trim() || !profileImage){
                                 return alert("Preencha todos os campos para continuar");
                             }
 
@@ -152,6 +178,7 @@ function RegisterScreen(props) {
                             setName("");
                             setPassword("");
                             setRepetirSenha("");
+                            setProfileImage(null);
                         }}>Cadastrar</button>
                     </div>
 
