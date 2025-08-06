@@ -1,7 +1,8 @@
 import Navbar from "./Navbar"
-import { useState } from 'react';
 import { MailOutlined, GithubOutlined, LockOutlined, UserOutlined, BellOutlined, MenuOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 
 
@@ -27,18 +28,70 @@ const MainCardsSection = ({ navigate }) => (
 function PetScreen() {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const navigate = useNavigate();
+
+  const [pets, setPets] = useState([]);
+
+  // Pega os pets do backend
+  useEffect(() => {
+    const fetchPets = async () => {
+      try {
+        // Recupera o token JWT do localStorage
+        const token = JSON.parse(localStorage.getItem('token') || '""');
+
+        if (!token) {
+          console.error("Token não encontrado");
+          return;
+        }
+
+        // Faz a requisição para o backend com o token no cabeçalho
+        const response = await axios.get("http://localhost:8080/admin/pets/all", {
+          headers: {
+            Authorization: `Bearer ${token}`, // Envia o token JWT no cabeçalho
+          }
+        });
+    
+        // Atualiza o estado com os dados dos pets
+         console.log(response.data); 
+        setPets(response.data);
+        
+      } catch (error) {
+        console.error("Erro ao buscar pets:", error.response ? error.response.data : error.message);
+      }
+    };
+
+    fetchPets();
+  }, []);
   return (
-    <div >
-      <div className="">
-        <h1 className="text-white">Teste da pagina de Pets</h1>
-        <button
-          onClick={() => navigate(-1)}
-          className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-600"
-        >
-          Voltar
-        </button>
-      </div>
+    
+   <div className="min-h-screen flex justify-center items-center">
+  <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-3xl">
+    <h1 className="text-2xl font-bold text-gray-800 mb-4">Teste da página de Pets</h1>
+    <h2 className="text-xl font-semibold text-gray-700 mb-6">Lista de Pets</h2>
+
+    <ul className="space-y-4">
+      {pets.map(pet => (
+        
+        <li key={pet.id} className="bg-gray-50 p-4 rounded-lg shadow-sm hover:bg-gray-100 transition">
+          <p className="text-gray-800 font-semibold">Nome: <span className="font-normal">{pet.nome}</span></p>
+          <p className="text-gray-800 font-semibold">Raça: <span className="font-normal">{pet.raca}</span></p>
+          <p className="text-gray-800 font-semibold">Tamanho: <span className="font-normal">{pet.tamanho}</span></p>
+          <p className="text-gray-800 font-semibold">Cor: <span className="font-normal">{pet.cor}</span></p>
+          <p className="text-gray-800 font-semibold">Dono: <span className="font-normal">{pet.dono?.name || 'Sem dono'}</span></p>
+        </li>
+      ))}
+    </ul>
+
+    <div className="mt-6 flex justify-center">
+      <button
+        onClick={() => navigate(-1)}
+        className="bg-gray-400 text-white px-6 py-3 rounded-md hover:bg-gray-600 transition"
+      >
+        Voltar
+      </button>
     </div>
+  </div>
+</div>
+
 
 
   )

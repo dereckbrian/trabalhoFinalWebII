@@ -21,9 +21,20 @@
               Authorization: `Bearer ${token}`, // Envia o token JWT no cabeçalho
             },
           });
+
+     console.log("Resposta da API:", response.data); // Verifique a resposta da API
+
+        // Verifica se a resposta é um array antes de atualizar o estado
+        if (Array.isArray(response.data)) {
+          setUsers(response.data);
+        } else {
+          console.error("Resposta da API não é um array");
+          setUsers([]); // Defina um array vazio caso a resposta não seja um array
+        }
           setUsers(response.data); // Atualiza o estado com os dados dos usuários
         } catch (error) {
           console.error("Erro ao buscar usuários", error);
+          setUsers([]); 
         }
       };
 

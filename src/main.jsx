@@ -20,6 +20,7 @@ import HomePage from './pages/HomePage.jsx'
 import PetsPage from './pages/PetsPage.jsx'
 import AvisosPage from './pages/AvisosPage.jsx'
 import AdminScreen from './components/AdminScreen.jsx'
+import PetScreen from './components/PetScreen.jsx'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -119,7 +120,7 @@ const router = createBrowserRouter([
   children: [
     {
       path: "", // quando acessar apenas "/"
-      element: <h1>Tela do adminininastror</h1>,
+      element: <PetScreen/>,
     },
     {
       path: "users",

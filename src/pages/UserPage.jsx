@@ -23,7 +23,7 @@ function UserPage() {
     }, [navigate]);
 
     return (
-        <div >
+        <div class >
             {/*<Navbar userName={userName}/>*/}
             
             <UserScreen />
