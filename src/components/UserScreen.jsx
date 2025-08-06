@@ -5,6 +5,7 @@ import { MailOutlined, GithubOutlined, LockOutlined, UserOutlined, BellOutlined,
 import SidebarLayout from './SidebarLayout';
 //Pegando o nome pra exibir
 const name = JSON.parse(localStorage.getItem('name') || '""');
+const foto = JSON.parse(localStorage.getItem('profilePicture'))
 console.log("Nome recuperado:", name);
 
 const IconCard = ({ title, icon, onClick }) => (
@@ -32,15 +33,56 @@ function UserScreen() {
   const [sidebarVisible, setSidebarVisible] = useState(false);
 
   return (
-     <div className="flex justify-center items-center w-screen h-screen bg-gradient-to-b from-[#4B3C5D] to-[#11051a]">
-      <div className="w-[95%] h-[95%] flex flex-col rounded-xl bg-slate-900 drop-shadow-lg relative overflow-hidden ">
-        {/* Sidebar Section */}
-        <SidebarLayout />
+   
+      <div
+        className="w-[95%] h-[95%] flex rounded-xl bg-slate-900 drop-shadow-[0px_10px_20px_rgba(0,0,0,0.5)] relative overflow-hidden"
+      >
+       
+        
 
-        {/* Main Content Area */}
-        <div className="flex flex-col flex-1 p-6 space-y-6">
-          <div className="w-full bg-gradient-to-r from-indigo-700 to-indigo-900 rounded-xl p-8 shadow-md hover:shadow-2xl transition-shadow duration-300">
-            <MainCardsSection navigate={navigate} />
+        <div
+          className={`flex-1 p-9 transition-all duration-300 overflow-y-auto ${sidebarVisible ? 'ml-[200px]' : 'ml-0'}`}
+        >
+          {/* Header com o botão de hambúrguer e informações do usuário */}
+          <div className="flex items-center mb-8">
+            {/* Botão para abrir a sidebar - visível apenas quando a sidebar está fechada */}
+            
+            <div className="flex items-center">
+              <div className="w-16 h-16 rounded-full overflow-hidden bg-white mr-4">
+                <img src={foto} alt="User Avatar" className="w-full h-full object-cover" />
+              </div>
+              <div>
+                <div className="text-sm text-gray-400">Bem Vindo</div>
+                <h2 className="text-2xl font-bold text-white">{name}</h2>
+                <p className="text-sm text-gray-400">Owner - Apt 10 Riverside Condos</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Package Pickup Card */}
+          <div className="bg-slate-800 p-6 rounded-lg flex justify-between items-center mb-8">
+            <div>
+              <h3 className="text-xl font-bold text-white">Package Pickup</h3>
+              <p className="text-sm text-gray-400">1 Item</p>
+              <p className="text-xs text-gray-500">due 06/07/2025</p>
+            </div>
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg">
+              Pick Up
+            </button>
+          </div>
+
+          {/* Main Cards Section */}
+          <MainCardsSection navigate={navigate} />
+
+          {/* Advertise Section */}
+          <div className="mt-8 bg-slate-800 p-6 rounded-lg flex justify-between items-center">
+            <div>
+              <h3 className="text-xl font-bold text-white">Advertise here</h3>
+              <p className="text-sm text-gray-400">Reach more than 10,000 residents</p>
+            </div>
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-2xl rounded-full w-10 h-10 flex items-center justify-center">
+              +
+            </button>
           </div>
         </div>
       </div>

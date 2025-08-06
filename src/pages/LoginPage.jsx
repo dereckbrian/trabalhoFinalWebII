@@ -13,9 +13,14 @@ const LoginPage = () => {
         .then(response => {
             const token = JSON.stringify(response.data.token);
             const name = JSON.stringify(response.data.name);
+            const profilePictureUrl = response.data.profilePictureUrl || null;
+            const foto = JSON.stringify(profilePictureUrl);
+
+
             console.log("Token JWT recebido", token);
             localStorage.setItem('token', token);
             localStorage.setItem('name', name);
+            localStorage.setItem('profilePicture', foto)
 
             const TokenSaved = localStorage.getItem('token'); // Pega o token JWT do localStorage
     const decodedToken = jwtDecode(TokenSaved);
