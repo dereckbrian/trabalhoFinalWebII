@@ -77,6 +77,12 @@ function PetScreen() {
           <p className="text-gray-800 font-semibold">Tamanho: <span className="font-normal">{pet.tamanho}</span></p>
           <p className="text-gray-800 font-semibold">Cor: <span className="font-normal">{pet.cor}</span></p>
           <p className="text-gray-800 font-semibold">Dono: <span className="font-normal">{pet.dono?.name || 'Sem dono'}</span></p>
+          <button
+                      onClick={()=>{navigate(`/adminPage/pets/${pet.id}`)}}
+                      className="text-blue-600 hover:text-blue-800"
+                    >
+                      Ver detalhes
+                    </button>
         </li>
       ))}
     </ul>
@@ -87,6 +93,12 @@ function PetScreen() {
         className="bg-gray-400 text-white px-6 py-3 rounded-md hover:bg-gray-600 transition"
       >
         Voltar
+      </button>
+      <button
+        onClick={() => navigate('/adminPage/pets-add')}
+        className="bg-purple-900 text-white px-6 py-3 rounded-md hover:bg-gray-600 transition ml-2"
+      >
+        Adicionar
       </button>
     </div>
   </div>

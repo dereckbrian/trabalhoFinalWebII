@@ -9,8 +9,39 @@ const AddPetPage = () => {
   const [cor, setCor] = useState("");
   const [donoId, setDonoId] = useState("");
   const [error, setError] = useState(null);
+  const [donos, setDonos] = useState([]);
+   const [selectedDonoId, setSelectedDonoId] = useState('');
   const navigate = useNavigate();
 
+
+
+    const fetchDonos = async () => {
+      try {
+        // Recupera o token JWT do localStorage
+        const token = JSON.parse(localStorage.getItem("token") || '""');
+
+        if (!token) {
+          console.error("Token não encontrado");
+          return;
+        }
+
+        // Faz a requisição para o backend com o token no cabeçalho
+        const response = await axios.get("http://localhost:8080/admin/users", {
+          headers: {
+            Authorization: `Bearer ${token}`, // Envia o token JWT no cabeçalho
+          },
+        });
+
+        // Atualiza o estado com os dados dos donos
+        setDonos(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar donos:", error);
+      }
+    };
+    fetchDonos();
+      const handleDonoChange = (e) => {5
+    setSelectedDonoId(e.target.value);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -27,7 +58,7 @@ const AddPetPage = () => {
         tamanho,
         cor,
         dono: {
-          id: donoId,
+          id: selectedDonoId,
         },
       };
 
@@ -39,7 +70,7 @@ const AddPetPage = () => {
 
       if (response.status === 200) {
         alert("Pet adicionado com sucesso!");
-        navigate("/pets");  // Redireciona para a lista de pets após adicionar
+        navigate("/adminPage");  // Redireciona para a lista de pets após adicionar
       }
     } catch (error) {
       setError("Erro ao adicionar pet. Tente novamente.");
@@ -107,18 +138,22 @@ const AddPetPage = () => {
             />
           </div>
 
-          <div>
-            <label htmlFor="donoId" className="text-white">ID do Dono</label>
-            <input
-              type="text"
-              id="donoId"
-              value={donoId}
-              onChange={(e) => setDonoId(e.target.value)}
-              className="w-full p-2 mt-2 bg-gray-700 text-white rounded-md"
-              placeholder="Digite o ID do dono"
-              required
-            />
-          </div>
+          <div className="mb-4">
+          <label htmlFor="dono" className="block text-gray-700 font-semibold">Escolha o Dono:</label>
+          <select
+            id="dono"
+            value={selectedDonoId}
+            onChange={handleDonoChange}
+            className="mt-2 p-2 border border-gray-300 rounded-md w-full"
+          >
+            <option value="">Selecione um dono</option>
+            {donos.map((dono) => (
+              <option key={dono.id} value={dono.id}>
+                {dono.name}
+              </option>
+            ))}
+          </select>
+        </div>
 
           <div className="flex justify-center mt-6">
             <button
@@ -132,7 +167,7 @@ const AddPetPage = () => {
 
         <div className="mt-6 flex justify-center">
           <button
-            onClick={() => navigate("/pets")}
+            onClick={() => navigate(-1)}
             className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-600"
           >
             Voltar

@@ -21,6 +21,8 @@ import PetsPage from './pages/PetsPage.jsx'
 import AvisosPage from './pages/AvisosPage.jsx'
 import AdminScreen from './components/AdminScreen.jsx'
 import PetScreen from './components/PetScreen.jsx'
+import AddPetPage from './components/AddPetScreen.jsx'
+import PetDetails from './components/PetsDetail.jsx'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -66,6 +68,11 @@ const router = createBrowserRouter([
         path: "users",
         element: <UserList />, // Página de lista de usuários
       },
+      {
+        path: "users",
+        element: <UserList />, // Página de lista de usuários
+      },
+     
     ],
   },
   {
@@ -94,6 +101,7 @@ const router = createBrowserRouter([
       path: "pets",
       element: <PetsPage/>,
     },
+    
     {
       path: "avisos",
       element: <AvisosPage/>,
@@ -116,7 +124,7 @@ const router = createBrowserRouter([
 // ROTAS GERAIS ADMINISTRADOR
   {
   path: "/adminPage",
-  element:  <PrivateRoute element={<AdminPage />} /> ,
+  element:  <ProtectedAdmin element={<AdminPage />} /> ,
   children: [
     {
       path: "", // quando acessar apenas "/"
@@ -131,6 +139,10 @@ const router = createBrowserRouter([
   element: <ProtectedAdmin element={<UserDetails />} />
     },
     {
+  path: "pets/:id", // Rota com parâmetro dinâmico
+  element: <ProtectedAdmin element={<PetDetails />} />
+},
+    {
       path: "pacotes",
       element: <PacotesPage/>,
     },
@@ -138,6 +150,10 @@ const router = createBrowserRouter([
     {
       path: "pets",
       element: <PetsPage/>,
+    },
+     {
+      path: "pets-add",
+      element: <AddPetPage/>,
     },
     {
       path: "avisos",
@@ -156,7 +172,8 @@ const router = createBrowserRouter([
       element: <h1 style={{ color: "white" }}>Hello from Settings!</h1>,
     },
   ],
-}
+},
+
 ]);
 
 createRoot(document.getElementById('root')).render(
