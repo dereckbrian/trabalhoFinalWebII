@@ -86,7 +86,7 @@ function UserScreen() {
           </div>
         </div>
       </div>
-    </div>
+    
   );
 }
 
