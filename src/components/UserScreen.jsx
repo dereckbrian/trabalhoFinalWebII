@@ -21,9 +21,9 @@ const MainCardsSection = ({ navigate }) => (
   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
     <IconCard title="Pacotes" icon={<MailOutlined />} onClick={() => navigate('/userPage/pacotes')} />
     <IconCard title="Pets" icon={<GithubOutlined />} nClick={() => navigate('/pets')} />
-    <IconCard title="Configurações de Conta" icon={<LockOutlined />} nClick={() => navigate('/configs')} />
-    <IconCard title="Meus Pets" icon={<UserOutlined />} nClick={() => navigate('/meusPets')} />
-    <IconCard title="Avisos" icon={<BellOutlined />} nClick={() => navigate('/avisos')} />
+    <IconCard title="Configurações de Conta" icon={<LockOutlined />} onClick={() => navigate('/configs')} />
+    <IconCard title="Meus Pets" icon={<UserOutlined />} oonClick={() => navigate('/meusPets')} />
+    <IconCard title="Avisos" icon={<BellOutlined />} onClick={() => navigate('/avisos')} />
   </div>
 );
 
