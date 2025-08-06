@@ -49,11 +49,11 @@ function PetScreen() {
             Authorization: `Bearer ${token}`, // Envia o token JWT no cabeçalho
           }
         });
-    
+
         // Atualiza o estado com os dados dos pets
-         console.log(response.data); 
+        console.log(response.data);
         setPets(response.data);
-        
+
       } catch (error) {
         console.error("Erro ao buscar pets:", error.response ? error.response.data : error.message);
       }
@@ -62,47 +62,49 @@ function PetScreen() {
     fetchPets();
   }, []);
   return (
-    
-   <div className="min-h-screen flex justify-center items-center">
-  <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-3xl">
-    <h1 className="text-2xl font-bold text-gray-800 mb-4">Teste da página de Pets</h1>
-    <h2 className="text-xl font-semibold text-gray-700 mb-6">Lista de Pets</h2>
 
-    <ul className="space-y-4">
-      {pets.map(pet => (
-        
-        <li key={pet.id} className="bg-gray-50 p-4 rounded-lg shadow-sm hover:bg-gray-100 transition">
-          <p className="text-gray-800 font-semibold">Nome: <span className="font-normal">{pet.nome}</span></p>
-          <p className="text-gray-800 font-semibold">Raça: <span className="font-normal">{pet.raca}</span></p>
-          <p className="text-gray-800 font-semibold">Tamanho: <span className="font-normal">{pet.tamanho}</span></p>
-          <p className="text-gray-800 font-semibold">Cor: <span className="font-normal">{pet.cor}</span></p>
-          <p className="text-gray-800 font-semibold">Dono: <span className="font-normal">{pet.dono?.name || 'Sem dono'}</span></p>
+    <div className="min-h-screen flex justify-center items-center">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-3xl">
+        <h1 className="text-2xl font-bold text-gray-800 mb-4">Teste da página de Pets</h1>
+        <h2 className="text-xl font-semibold text-gray-700 mb-6">Lista de Pets</h2>
+
+        <ul className="space-y-4">
+          {pets.map(pet => (
+
+            <li key={pet.id} className="bg-gray-50 p-4 rounded-lg shadow-sm hover:bg-gray-100 transition">
+              {/* Exibe a imagem */}
+              <img src={`http://localhost:8080${pet.imagem}`} alt={`Foto de ${pet.nome}`}className="w-32 h-32 object-cover rounded-md mb-4"/>
+              <p className="text-gray-800 font-semibold">Nome: <span className="font-normal">{pet.nome}</span></p>
+              <p className="text-gray-800 font-semibold">Raça: <span className="font-normal">{pet.raca}</span></p>
+              <p className="text-gray-800 font-semibold">Tamanho: <span className="font-normal">{pet.tamanho}</span></p>
+              <p className="text-gray-800 font-semibold">Cor: <span className="font-normal">{pet.cor}</span></p>
+              <p className="text-gray-800 font-semibold">Dono: <span className="font-normal">{pet.dono?.name || 'Sem dono'}</span></p>
+              <button
+                onClick={() => { navigate(`/adminPage/pets/${pet.id}`) }}
+                className="text-blue-600 hover:text-blue-800"
+              >
+                Ver detalhes
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-6 flex justify-center">
           <button
-                      onClick={()=>{navigate(`/adminPage/pets/${pet.id}`)}}
-                      className="text-blue-600 hover:text-blue-800"
-                    >
-                      Ver detalhes
-                    </button>
-        </li>
-      ))}
-    </ul>
-
-    <div className="mt-6 flex justify-center">
-      <button
-        onClick={() => navigate(-1)}
-        className="bg-gray-400 text-white px-6 py-3 rounded-md hover:bg-gray-600 transition"
-      >
-        Voltar
-      </button>
-      <button
-        onClick={() => navigate('/adminPage/pets-add')}
-        className="bg-purple-900 text-white px-6 py-3 rounded-md hover:bg-gray-600 transition ml-2"
-      >
-        Adicionar
-      </button>
+            onClick={() => navigate(-1)}
+            className="bg-gray-400 text-white px-6 py-3 rounded-md hover:bg-gray-600 transition"
+          >
+            Voltar
+          </button>
+          <button
+            onClick={() => navigate('/adminPage/pets-add')}
+            className="bg-purple-900 text-white px-6 py-3 rounded-md hover:bg-gray-600 transition ml-2"
+          >
+            Adicionar
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
 
 

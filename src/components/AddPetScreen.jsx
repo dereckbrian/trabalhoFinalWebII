@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -7,46 +7,50 @@ const AddPetPage = () => {
   const [raca, setRaca] = useState("");
   const [tamanho, setTamanho] = useState("");
   const [cor, setCor] = useState("");
-  const [donoId, setDonoId] = useState("");
-  const [error, setError] = useState(null);
+  const [selectedDonoId, setSelectedDonoId] = useState("");
+  const [imagemFile, setImagemFile] = useState(null); // Para armazenar a imagem
   const [donos, setDonos] = useState([]);
-   const [selectedDonoId, setSelectedDonoId] = useState('');
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  const handleFileChange = (e) => {
+    setImagemFile(e.target.files[0]);
+  };
 
+  const fetchDonos = async () => {
+    try {
+      const token = JSON.parse(localStorage.getItem("token") || '""');
 
-    const fetchDonos = async () => {
-      try {
-        // Recupera o token JWT do localStorage
-        const token = JSON.parse(localStorage.getItem("token") || '""');
-
-        if (!token) {
-          console.error("Token não encontrado");
-          return;
-        }
-
-        // Faz a requisição para o backend com o token no cabeçalho
-        const response = await axios.get("http://localhost:8080/admin/users", {
-          headers: {
-            Authorization: `Bearer ${token}`, // Envia o token JWT no cabeçalho
-          },
-        });
-
-        // Atualiza o estado com os dados dos donos
-        setDonos(response.data);
-      } catch (error) {
-        console.error("Erro ao buscar donos:", error);
+      if (!token) {
+        console.error("Token não encontrado");
+        return;
       }
-    };
-    fetchDonos();
-      const handleDonoChange = (e) => {5
+
+      const response = await axios.get("http://localhost:8080/admin/users", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setDonos(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error("Erro ao buscar donos:", error);
+    }
+  };
+  
+  useEffect(() => {
+    fetchDonos(); // Chama a função apenas uma vez
+  }, []);
+  const handleDonoChange = (e) => {
     setSelectedDonoId(e.target.value);
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const token = JSON.parse(localStorage.getItem('token') || '""');
+      const token = JSON.parse(localStorage.getItem("token") || '""');
       if (!token) {
         setError("Token não encontrado. Faça login.");
         return;
@@ -57,20 +61,23 @@ const AddPetPage = () => {
         raca,
         tamanho,
         cor,
-        dono: {
-          id: selectedDonoId,
-        },
+        dono: { id: selectedDonoId },
       };
 
-      const response = await axios.post("http://localhost:8080/admin/pets/add", petData, {
+      const formData = new FormData();
+      formData.append("pet", JSON.stringify(petData)); // Adiciona os dados do pet como string JSON
+      formData.append("imagem", imagemFile); // Adiciona a imagem
+
+      const response = await axios.post("http://localhost:8080/admin/pets/add", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data", // Necessário para enviar arquivos
         },
       });
 
       if (response.status === 200) {
         alert("Pet adicionado com sucesso!");
-        navigate("/adminPage");  // Redireciona para a lista de pets após adicionar
+        navigate("/adminPage");
       }
     } catch (error) {
       setError("Erro ao adicionar pet. Tente novamente.");
@@ -82,7 +89,7 @@ const AddPetPage = () => {
     <div className="bg-gray-800 min-h-screen p-8">
       <div className="max-w-lg mx-auto bg-gray-900 p-6 rounded-lg shadow-xl">
         <h1 className="text-3xl font-bold text-white mb-6">Adicionar Pet</h1>
-        
+
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -139,21 +146,32 @@ const AddPetPage = () => {
           </div>
 
           <div className="mb-4">
-          <label htmlFor="dono" className="block text-gray-700 font-semibold">Escolha o Dono:</label>
-          <select
-            id="dono"
-            value={selectedDonoId}
-            onChange={handleDonoChange}
-            className="mt-2 p-2 border border-gray-300 rounded-md w-full"
-          >
-            <option value="">Selecione um dono</option>
-            {donos.map((dono) => (
-              <option key={dono.id} value={dono.id}>
-                {dono.name}
-              </option>
-            ))}
-          </select>
-        </div>
+            <label htmlFor="dono" className="block text-gray-700 font-semibold">Escolha o Dono:</label>
+            <select
+              id="dono"
+              value={selectedDonoId}
+              onChange={handleDonoChange}
+              className="mt-2 p-2 border border-gray-300 rounded-md w-full"
+            >
+              <option value="">Selecione um dono</option>
+              {donos.map((dono) => (
+                <option key={dono.id} value={dono.id}>
+                  {dono.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="foto" className="text-white">Foto do Pet</label>
+            <input
+              type="file"
+              id="foto"
+              onChange={handleFileChange}
+              className="w-full p-2 mt-2 bg-gray-700 text-white rounded-md"
+              accept="image/*"
+            />
+          </div>
 
           <div className="flex justify-center mt-6">
             <button
