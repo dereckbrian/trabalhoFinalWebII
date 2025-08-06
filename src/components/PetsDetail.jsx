@@ -11,6 +11,7 @@ const PetDetails = () => {
     raca: "",
     tamanho: "",
     cor: "",
+    
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -33,8 +34,10 @@ const PetDetails = () => {
           raca: response.data.raca,
           tamanho: response.data.tamanho,
           cor: response.data.cor,
+          donoId: response.data.dono.id, 
         });
         setLoading(false);
+        console.log(response.data);
       } catch (error) {
         console.error("Erro ao carregar pet:", error);
         setError("Pet não encontrado.");
@@ -56,10 +59,18 @@ const PetDetails = () => {
       return;
     }
 
+    const petData = {
+    nome: formData.nome,
+    raca: formData.raca,
+    tamanho: formData.tamanho,
+    cor: formData.cor,
+    dono: { id: formData.donoId }, // Envia o ID do dono para o backend
+  };
+
     try {
       const response = await axios.put(
         `http://localhost:8080/admin/pets/update/${id}`,
-        formData,
+        petData,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
