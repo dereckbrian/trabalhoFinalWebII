@@ -32,7 +32,7 @@ function PetScreen() {
   const TokenSaved = localStorage.getItem('token'); // Pega o token JWT do localStorage
   const decodedToken = jwtDecode(TokenSaved);
   const role = decodedToken.role;
-   let showButton = false;
+  let showButton = false;
   if (role === "ADMIN") {
     showButton = true;
   }
@@ -70,7 +70,7 @@ function PetScreen() {
 
     <div className="min-h-screen flex justify-center items-center">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-3xl">
-        <h1 className="text-2xl font-bold text-gray-800 mb-4">Teste da página de Pets</h1>
+      
         <h2 className="text-xl font-semibold text-gray-700 mb-6">Lista de Pets</h2>
 
         <ul className="space-y-4">
@@ -85,13 +85,13 @@ function PetScreen() {
               <p className="text-gray-800 font-semibold">Cor: <span className="font-normal">{pet.cor}</span></p>
               <p className="text-gray-800 font-semibold">Dono: <span className="font-normal">{pet.dono?.name || 'Sem dono'}</span></p>
               {showButton && (
-        <button
-          onClick={() => { navigate(`/adminPage/pets/${pet.id}`) }}
-          className="text-blue-600 hover:text-blue-800"
-        >
-          Ver detalhes
-        </button>
-      )}
+                <button
+                  onClick={() => { navigate(`/adminPage/pets/${pet.id}`) }}
+                  className="text-blue-600 hover:text-blue-800"
+                >
+                  Ver detalhes
+                </button>
+              )}
 
             </li>
           ))}
@@ -105,12 +105,16 @@ function PetScreen() {
           >
             Voltar
           </button>
-          <button
-            onClick={() => navigate('/adminPage/pets-add')}
-            className="bg-purple-900 text-white px-6 py-3 rounded-md hover:bg-gray-600 transition ml-2"
-          >
-            Adicionar
-          </button>
+
+          {showButton && (
+            <button
+              onClick={() => navigate('/adminPage/pets-add')}
+              className="bg-purple-900 text-white px-6 py-3 rounded-md hover:bg-gray-600 transition ml-2"
+            >
+              Adicionar
+            </button>
+          )}
+
         </div>
       </div>
     </div>

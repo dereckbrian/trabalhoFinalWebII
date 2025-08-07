@@ -90,19 +90,7 @@ function LoginScreen(props) {
                         </div>
                     </div>
 
-                    <div className="text-xl space-y-2">
-                        <div className="flex items-center space-x-2 mt-4">
-                            <div className={styles.App}>
-                                <button
-                                    className={`${styles['toggle-btn']} ${toggle ? styles.toggled : ''}`}
-                                    onClick={() => setToggle(!toggle)}
-                                >
-                                    <div className={styles.thumb}></div>
-                                </button>
-                            </div>
-                            <label className="text-white text-sm">Salvar Acesso</label>
-                        </div>
-                    </div>
+                    
 
                     <div className="flex justify-center space-y-4 p-6 font-bold font-extrabold">
                         <button className="w-[200px] rounded-md bg-green-700 text-white px-4 py-2" onClick={()=>{
@@ -115,9 +103,7 @@ function LoginScreen(props) {
                         }}>Entrar</button>
                     </div>
 
-                    <div className="flex justify-center">
-                        <a href="#" className="text-sm text-blue-600 hover:underline">Esqueceu sua senha?</a>
-                    </div>
+                    
 
                     <div className="flex justify-center">
                         <label className="text-sm text-slate-300">Não tem uma conta? <button onClick={()=> onClickRegister()} className="text-sm text-blue-600 hover:underline"> Registre-se</button></label>

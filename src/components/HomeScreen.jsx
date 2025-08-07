@@ -37,7 +37,7 @@ function HomeScreen() {
     const profilePicToDisplay = userProfilePicPath 
       ? `http://localhost:8080${userProfilePicPath}` 
       : defaultProfilePicUrl;
-
+    console.log(userProfilePicPath);
     return (
        <div >
             <div className="">

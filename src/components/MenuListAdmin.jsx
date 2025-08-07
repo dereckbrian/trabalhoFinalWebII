@@ -13,14 +13,14 @@ const MenuListAdmin = ({ darkTheme }) => {
 
             <Menu.Item key="/adminPage" icon={<HomeOutlined />}
             >
-                Home
+                Pets
             </Menu.Item>
 
             <Menu.Item key="/adminPage/users" icon={<UserOutlined/>}
             >
                 Usuarios
             </Menu.Item>
-            <Menu.SubMenu
+            {/* <Menu.SubMenu
                 key="subtasks"
                 icon={<BarsOutlined />}
                 title="Tasks"
@@ -31,21 +31,21 @@ const MenuListAdmin = ({ darkTheme }) => {
                     <Menu.Item key="subtask-1">Subtask 1</Menu.Item>
                     <Menu.Item key="subtask-2">Subtask 2</Menu.Item>
                 </Menu.SubMenu>
-            </Menu.SubMenu>
-            <Menu.Item key="progress" icon={<AreaChartOutlined />}
+            </Menu.SubMenu> */}
+            {/* <Menu.Item key="progress" icon={<AreaChartOutlined />}
             >
                 Progress
-            </Menu.Item>
+            </Menu.Item> */}
 
-            <Menu.Item key="payment" icon={<PayCircleOutlined />}
+            {/* <Menu.Item key="payment" icon={<PayCircleOutlined />}
             >
                 Payment
-            </Menu.Item>
+            </Menu.Item> */}
 
-            <Menu.Item key="setting" icon={<SettingFilled />}
+            {/* <Menu.Item key="setting" icon={<SettingFilled />}
             >
                 Setting
-            </Menu.Item>
+            </Menu.Item> */}
             <Menu.Item key="/logout" icon={<LogoutOutlined />}
             >
                 Logout

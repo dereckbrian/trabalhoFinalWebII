@@ -16,11 +16,11 @@ const MenuList = ({ darkTheme }) => {
                 Home
             </Menu.Item>
 
-            <Menu.Item key="/userPage/activity" icon={<AppstoreAddOutlined />}
+            {/* <Menu.Item key="/userPage/activity" icon={<AppstoreAddOutlined />}
             >
                 Activity
-            </Menu.Item>
-            <Menu.SubMenu
+            </Menu.Item> */}
+            {/* <Menu.SubMenu
                 key="subtasks"
                 icon={<BarsOutlined />}
                 title="Tasks"
@@ -31,8 +31,8 @@ const MenuList = ({ darkTheme }) => {
                     <Menu.Item key="subtask-1">Subtask 1</Menu.Item>
                     <Menu.Item key="subtask-2">Subtask 2</Menu.Item>
                 </Menu.SubMenu>
-            </Menu.SubMenu>
-            <Menu.Item key="progress" icon={<AreaChartOutlined />}
+            </Menu.SubMenu> */}
+            {/* <Menu.Item key="progress" icon={<AreaChartOutlined />}
             >
                 Progress
             </Menu.Item>
@@ -45,7 +45,7 @@ const MenuList = ({ darkTheme }) => {
             <Menu.Item key="setting" icon={<SettingFilled />}
             >
                 Setting
-            </Menu.Item>
+            </Menu.Item> */}
             <Menu.Item key="/logout" icon={<LogoutOutlined />}
             >
                 Logout
