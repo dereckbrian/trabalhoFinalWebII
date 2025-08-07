@@ -11,6 +11,9 @@ const LoginPage = () => {
             password: dadosLogin.password
         })
         .then(response => {
+
+            console.log("Resposta completa da API:", response.data);
+            
             const token = JSON.stringify(response.data.token);
             const name = JSON.stringify(response.data.name);
             const profilePictureUrl = response.data.profilePictureUrl || null;

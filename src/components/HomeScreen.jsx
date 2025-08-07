@@ -1,5 +1,5 @@
 import Navbar from "./Navbar"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MailOutlined, GithubOutlined, LockOutlined, UserOutlined, BellOutlined, MenuOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom';
 
@@ -27,24 +27,32 @@ const MainCardsSection = ({ navigate }) => (
 function HomeScreen() {
     const [sidebarVisible, setSidebarVisible] = useState(false);
     const navigate = useNavigate();
+
     const name = JSON.parse(localStorage.getItem('name') || '""');
+    const userProfilePicPath = JSON.parse(localStorage.getItem('profilePicture') || '""');
+
+    const defaultProfilePicUrl = "https://i.pravatar.cc/150?img=1";
+    
+    // Constrói a URL completa da imagem, se o caminho existir
+    const profilePicToDisplay = userProfilePicPath 
+      ? `http://localhost:8080${userProfilePicPath}` 
+      : defaultProfilePicUrl;
+
     return (
        <div >
             <div className="">
-                
-
+              
 
                 <div className="flex items-center mb-8">
             {/* Botão para abrir a sidebar - visível apenas quando a sidebar está fechada */}
 
             <div className="flex items-center">
               <div className="w-16 h-16 rounded-full overflow-hidden bg-white mr-4">
-                <img src="https://i.pravatar.cc/150?img=1" alt="User Avatar" className="w-full h-full object-cover" />
+                <img src={profilePicToDisplay} alt="User Avatar" className="w-full h-full object-cover" />
               </div>
               <div>
                 <div className="text-sm text-gray-400">Bem Vindo</div>
                 <h2 className="text-2xl font-bold text-white">{name}</h2>
-                <p className="text-sm text-gray-400">Owner - Apt 10 Riverside Condos</p>
               </div>
             </div>
           </div>    
