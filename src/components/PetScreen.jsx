@@ -3,8 +3,7 @@ import { MailOutlined, GithubOutlined, LockOutlined, UserOutlined, BellOutlined,
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
-
+import { jwtDecode } from 'jwt-decode';
 
 const IconCard = ({ title, icon, onClick }) => (
   <div className="flex flex-col items-center justify-center p-4 bg-slate-800 rounded-lg shadow-md hover:bg-slate-700 transition-colors duration-200 cursor-pointer"
@@ -30,7 +29,13 @@ function PetScreen() {
   const navigate = useNavigate();
 
   const [pets, setPets] = useState([]);
-
+  const TokenSaved = localStorage.getItem('token'); // Pega o token JWT do localStorage
+  const decodedToken = jwtDecode(TokenSaved);
+  const role = decodedToken.role;
+   let showButton = false;
+  if (role === "ADMIN") {
+    showButton = true;
+  }
   // Pega os pets do backend
   useEffect(() => {
     const fetchPets = async () => {
@@ -73,20 +78,24 @@ function PetScreen() {
 
             <li key={pet.id} className="bg-gray-50 p-4 rounded-lg shadow-sm hover:bg-gray-100 transition">
               {/* Exibe a imagem */}
-              <img src={`http://localhost:8080${pet.imagem}`} alt={`Foto de ${pet.nome}`}className="w-32 h-32 object-cover rounded-md mb-4"/>
+              <img src={`http://localhost:8080${pet.imagem}`} alt={`Foto de ${pet.nome}`} className="w-32 h-32 object-cover rounded-md mb-4" />
               <p className="text-gray-800 font-semibold">Nome: <span className="font-normal">{pet.nome}</span></p>
               <p className="text-gray-800 font-semibold">Raça: <span className="font-normal">{pet.raca}</span></p>
               <p className="text-gray-800 font-semibold">Tamanho: <span className="font-normal">{pet.tamanho}</span></p>
               <p className="text-gray-800 font-semibold">Cor: <span className="font-normal">{pet.cor}</span></p>
               <p className="text-gray-800 font-semibold">Dono: <span className="font-normal">{pet.dono?.name || 'Sem dono'}</span></p>
-              <button
-                onClick={() => { navigate(`/adminPage/pets/${pet.id}`) }}
-                className="text-blue-600 hover:text-blue-800"
-              >
-                Ver detalhes
-              </button>
+              {showButton && (
+        <button
+          onClick={() => { navigate(`/adminPage/pets/${pet.id}`) }}
+          className="text-blue-600 hover:text-blue-800"
+        >
+          Ver detalhes
+        </button>
+      )}
+
             </li>
           ))}
+
         </ul>
 
         <div className="mt-6 flex justify-center">
