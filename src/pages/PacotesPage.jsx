@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import api from '../config/axiosInstance';
-import PacotesScreen from '../components/PacoteScreen';
+import PacotesScreen from '../components/AddPacote';
+import PackageScreen from '../components/PackageScreen';
 function PacotesPage() {
 
 /*   const token = JSON.parse(localStorage.getItem('token') | "");
@@ -43,8 +44,9 @@ function PacotesPage() {
     <div className="flex-1 p-9 transition-all duration-300  bg-slate-900 overflow-y-auto ml-0">
       <div
         >
-         <PacotesScreen/>
-
+          <PackageScreen/>
+         
+        
         </div>
       </div>
   );
